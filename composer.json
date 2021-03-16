@@ -1,0 +1,14 @@
+{
+    "name": "maki/foodle",
+    "description": "Foodle app for intro2web",
+    "license": "Apache2",
+    "authors": [
+        {
+            "name": "Makii117",
+            "email": "MakiOnPc@gmail.com"
+        }
+    ],
+    "require": {
+        "twbs/bootstrap": "^4.6"
+    }
+}
