@@ -29,7 +29,9 @@ public function insert(){
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function query_unique(){
+  public function query_unique($query,$params){
+      $results = $this->query($query,$params);
+      return reset($results);
   }
 
 
