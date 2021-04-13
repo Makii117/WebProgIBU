@@ -6,6 +6,6 @@ error_reporting(E_ALL);
 
 require_once dirname(__FILE__)."/dao/BaseDao.class.php";
 
-$maki = new BaseDao();
+$maki = new BaseDao($table);
 echo "API working";
 ?>

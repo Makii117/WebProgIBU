@@ -2,25 +2,23 @@
 
 
 require_once dirname(__FILE__)."/dao/UserDao.class.php";
-
-$user_dao = new UserDao();
-
+require_once dirname(__FILE__)."/dao/CafeDao.class.php";
 
 
-$user1=[
-"name"=>"Asim Veledarevic",
-"email"=>"asim@gmail.com",
-"password"=>"1234",
-"account_id"=>1
+
+$dao=new CafeDao();
+
+$cafe=[
+    "name"=>"Te Amo",
+    "location"=>"Nova Otoka",
+    "happyHourStart"=>"06:00:00",
+    "happyHourEnd"=>"09:00:00",
+    "offer"=>"Kafa marka"
 ];
 
+$dao->add($cafe);
 
-$user=$user_dao->add_user($user1);
 
-//$user =$user_dao->get_user_by_id(3);
-
-//$user_dao->get_user_by_email("maki@gmail.com");
-
-print_r($user)
+print_r($cafe)
 
 ?>
