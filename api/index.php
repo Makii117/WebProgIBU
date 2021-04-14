@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 require dirname(__FILE__)."/../vendor/autoload.php";
 require dirname(__FILE__)."/dao/CafeDao.class.php";
 
-
+echo("HELLO")
 
 
 
