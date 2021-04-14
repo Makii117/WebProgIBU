@@ -70,7 +70,9 @@ protected function insert($table,$entity){
   public function get_by_id($id){
     return $this->query("SELECT * FROM ".$this->table." WHERE id = :id",["id"=>$id]);
   }
-
+  public function get_all($offset=0,$limit=25){
+    return $this->query("SELECT * FROM ".$this->table."LIMIT ${limit} OFFSET ${offset}",[]);
+  }
 
 
 }

@@ -21,7 +21,9 @@ class CafeDao extends BaseDao{
     public function get_offer($id){
         return $this->query("SELECT offer FROM cafes WHERE id =:id",["id"=>$id]);
     }
-
+    public function get_all_cafe(){
+        return $this->query("SELECT * FROM cafes",[]);
+    }
 
 }
 
