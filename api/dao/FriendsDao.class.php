@@ -5,7 +5,8 @@ class frienssDao extends BaseDao{
     public function __construct(){
         parent::__construct("friends");
     }
-    public function get_friends(){
+    public function get_all_friends($userid){
+
         
     }
 
