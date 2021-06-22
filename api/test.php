@@ -19,6 +19,8 @@ $cafe=[
 $dao->add($cafe);
 
 
-print_r($cafe)
+$cafes=$dao->get_all_cafe;
 
+print_r($cafes);
+echo json_encode($cafes,JSON_PRETTY_PRINT);
 ?>
