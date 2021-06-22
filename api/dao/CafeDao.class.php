@@ -24,7 +24,12 @@ class CafeDao extends BaseDao{
     public function get_all_cafe(){
         return $this->query("SELECT * FROM cafes",[]);
     }
-
+    public function get_cafes($search,$offset,$limit){
+        return $this->query("SELECT * FROM cafes WHERE LOWER(name) LIKE CONCAT('%', :name, '%')
+        LIMIT ${limit} OFFSET ${offset}", ["name" => strtolower($search)]);
+        
+        
+            }
 }
 
 
