@@ -18,7 +18,7 @@ require_once dirname(__FILE__)."/routes/users.php";
 
 //include services
 require_once dirname(__FILE__)."/services/AccountService.class.php";
-require_once dirname(__FILE__).'/services/UserService.class.php';
+require_once dirname(__FILE__)."/services/UserService.class.php";
 
 Flight::set('flight.log_errors', TRUE);
 

@@ -30,9 +30,8 @@ class CafeDao extends BaseDao{
         LIMIT ${limit} OFFSET ${offset}", ["name" => strtolower($search)]);
         
         
-            }
-
-            public function get_cafes($cafe_id, $offset, $limit, $search,$order){
+    }
+    public function get_cafes_oredered($cafe_id, $offset, $limit, $search,$order){
                 list($order_column, $order_direction) = self::parse_order($order);
 
                 $params = ["cafe_id" => $cafe_id];
@@ -51,6 +50,6 @@ class CafeDao extends BaseDao{
             
                 return $this->query($query, $params);
 }
-
+}
 
 ?>
