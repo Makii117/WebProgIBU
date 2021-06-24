@@ -14,9 +14,9 @@ class UserService extends BaseService{
 
   public function register($user){
     if (!isset($user['account'])) throw new Exception("Account field is required");
-
+    $this->dao->beginTransaction();
     try {
-      $this->dao->beginTransaction();
+ 
       $account = $this->accountDao->add([
         "name" => $user['account'],
         "status" => "PENDING",
@@ -34,7 +34,7 @@ class UserService extends BaseService{
         "token" => md5(random_bytes(16))
         
       ]);
-      $this->dao->commit();
+
     } catch (\Exception $e) {
       $this->dao->rollBack();
       if (str_contains($e->getMessage(), 'users.uq_user_email')) {
@@ -43,7 +43,7 @@ class UserService extends BaseService{
         throw $e;
       }
     }
-
+    $this->dao->commit();
     // TODO: send email with some token
 
     return $user;

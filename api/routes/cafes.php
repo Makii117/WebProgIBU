@@ -1,13 +1,16 @@
 <?php
 Flight::route('GET /cafes', function(){
+    $cafe_id=Flight::query('cafe_id');
     $offset = Flight::query('offset', 0);
     $limit = Flight::query('limit', 25);
     $search = Flight::query('search');
+    $order = Flight::query('order','-id');
+
 
   if ($search){
-    Flight::json(Flight::CafeDao()->get_cafes($search, $offset, $limit));
+    Flight::json(Flight::CafeDao()->get_cafes($search, $offset, $limit, $order));
   }else{
-    Flight::json(Flight::CafeDao()->get_all($offset,$limit));
+    Flight::json(Flight::CafeDao()->get_all($offset,$limit, $order));
   }
 });
 
@@ -24,10 +27,7 @@ Flight::route('PUT /cafe/@id', function($id){
 
   $request = Flight::request();
   $data = $request->data->getData();
-
-  Flight::CafeDao()->update($id, $data);
-  $cafe = Flight::CafeDao()->get_by_id($id);
-  Flight::json($cafe);
+  Flight::json(Flight::CafeService()->update($id, $data));
 });
 
 

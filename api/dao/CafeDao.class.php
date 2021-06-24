@@ -21,6 +21,7 @@ class CafeDao extends BaseDao{
     public function get_offer($id){
         return $this->query("SELECT offer FROM cafes WHERE id =:id",["id"=>$id]);
     }
+
     public function get_all_cafe(){
         return $this->query("SELECT * FROM cafes",[]);
     }
@@ -30,6 +31,25 @@ class CafeDao extends BaseDao{
         
         
             }
+
+            public function get_cafes($cafe_id, $offset, $limit, $search,$order){
+                list($order_column, $order_direction) = self::parse_order($order);
+
+                $params = ["cafe_id" => $cafe_id];
+                $query = "SELECT *
+                          FROM cafes
+                          WHERE id = :cafe_id ";
+            
+
+
+                if (isset($search)){
+                  $query .= "AND ( LOWER(name) LIKE CONCAT('%', :search, '%') OR LOWER(subject) LIKE CONCAT('%', :search, '%'))";
+                  $params['search'] = strtolower($search);
+                }
+                $query .= "ORDER BY ${order_column} ${order_direction} ";
+                $query .="LIMIT ${limit} OFFSET ${offset}";
+            
+                return $this->query($query, $params);
 }
 
 

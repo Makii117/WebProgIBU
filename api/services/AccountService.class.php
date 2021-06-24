@@ -1,9 +1,10 @@
 <?php
 
+
+require_once dirname(__FILE__). '/BaseService.class.php';
 require_once dirname(__FILE__) . "/../dao/AccountDao.class.php";
 
-class AccountService{
-    private $dao;
+class AccountService extends BaseService{
 
 public function __construct(){
     $this->dao =new AccountDao();
@@ -18,7 +19,7 @@ if ($search){
 }
 public function add($account){
     // validation of account data
-    if (!isset($account['name'])) throw new Exception("Bla bla bla name is missing");
+    if (!isset($account['name'])) throw new Exception("Account name is missing");
     return parent::add($account);
   }
 
