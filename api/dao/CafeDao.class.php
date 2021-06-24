@@ -6,6 +6,10 @@ class CafeDao extends BaseDao{
         parent::__construct("cafes");
     }
 
+
+
+
+    
     public function get_rating($id){
         return $this->query("SELECT rating FROM cafes WHERE id =:id",["id"=>$id]);
     }
