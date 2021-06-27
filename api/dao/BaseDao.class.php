@@ -2,6 +2,7 @@
 
 
 require_once dirname(__FILE__)."/../config.php";
+
 class BaseDao{
     protected $connection;
     
@@ -10,6 +11,7 @@ class BaseDao{
     public function beginTransaction(){
 
       $response = $this->connection->beginTransaction();
+
     }
   
     public function commit(){
@@ -18,6 +20,7 @@ class BaseDao{
   
     public function rollBack(){
       $response = $this->connection->rollBack();
+
     }
 
     public function parse_order($order){
@@ -39,26 +42,36 @@ class BaseDao{
         $this->table = $table;
    try{
 
-        $this ->connection=new PDO("mysql:host=".Config::DB_HOST.";dbname=".Config::DB_SCHEME, Config::DB_USERNAME, Config::DB_PASSWORD);
-        $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        //$this->connection->setAttribute(PDO::ATTR_AUTOCOMMIT, 0);
+    $this->connection = new PDO("mysql:host=".Config::DB_HOST().";port=".Config::DB_PORT().";dbname=".Config::DB_SCHEME(), Config::DB_USERNAME(), Config::DB_PASSWORD());
+    $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //$this->connection->setAttribute(PDO::ATTR_AUTOCOMMIT, 0);
     } catch (PDOException $e) {
     throw $e;    
     }
 }
 
 protected function insert($table,$entity){
+
+  print_r($entity);
+
     $query="INSERT INTO ${table} (";
     foreach($entity as $column=>$value){
         $query .=$column.",";
     }
-    $query=substr($query,0,-2);
+
+ 
+    
+    $query=substr($query,0,-1);
+
+  
     $query .= ") VALUES (";
     foreach($entity as $column=>$value){
         $query .= ":".$column.",";
     }
-    $query=substr($query,0,-2);
+   
+    $query=substr($query,0,-1);
     $query .= ")";
+    print_r($query);
     $stmt=$this->connection->prepare($query);
     $stmt->execute($entity);
     $entity['id']=$this->connection->lastInsertId();
@@ -70,9 +83,9 @@ protected function insert($table,$entity){
   protected function excecute_update($table,$id,$entity,$id_column="id"){
     $query="UPDATE ${table} SET ";
     foreach($entity as $name=>$value){
-            $query .= $name ."= :".$name.", ";
+            $query .= $name ."= :".$name.",";
     }
-    $query=substr($query,-0,-2);
+    $query=substr($query,-0,-1);
     $query .= "WHERE id =:id";
     $stmt=$this->connection->prepare($query);
     $entity['id']=$id;

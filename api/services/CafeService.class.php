@@ -6,29 +6,47 @@ require_once dirname(__FILE__).'/../dao/CafeDao.class.php';
 
 class CafeService extends BaseService{
 
+
     public function __construct(){
-      $this->dao = new CafeeDao();
+      $this-> dao = new CafeDao();
     }
 
     public function add($cafe){
         try {
-            
+          $data = [
+            "cafe_name" => $cafe["cafe_name"],
+            "location" => $cafe["location"],
+            "happyHourStart" => $cafe["happyHourStart"],
+            "happyHourEnd" => $cafe["happyHourEnd"],
+            "rating" => $cafe["rating"],
+            "offer"=>$cafe["offer"]
+          ];
             return parent::add($cafe);
         } catch (\Exception $e) {
-            if (str_contains($e->getMessage(), 'cafes.name')) {
+            if (str_contains($e->getMessage(), 'cafe.name')) {
                 throw new Exception("Cafe with same name already exists", 400, $e);
               }else{
-                throw $e;
+                throw new Exception($e->getMessage(), 400, $e);
               }
+
         }
 
     }
 
-     public function get($cafe_id, $offset, $limit, $search,$order){
-         return $this->dao->get($cafe_id, $offset, $limit, $search,$order);
 
-     }
 
+        public function get_cafes($search, $offset, $limit,$order){
+          if ($search){
+            return $this->dao->get_cafes($search, $offset, $limit,$order);
+            }else{
+              return $this->dao->get_all($offset,$limit,$order);
+            }
+          
+          }
+
+
+      }
+    
 
 
 ?>

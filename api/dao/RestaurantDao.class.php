@@ -21,13 +21,19 @@ class RestaurantDao extends BaseDao{
     public function get_offer($id){
         return $this->query("SELECT offer FROM restaurants WHERE id =:id",["id"=>$id]);
     }
+      
+    public function get_restaurants($search,$offset,$limit,$order){
 
-    public function get_restaurants($search,$offset,$limit){
-        return $this->query("SELECT * FROM restaurants WHERE LOWER(name) LIKE CONCAT('%', :name, '%')
-        LIMIT ${limit} OFFSET ${offset}", ["name" => strtolower($search)]);
+        list($order_column, $order_direction) = self::parse_order($order);
+
+
+        return $this->query("SELECT * FROM cafes WHERE LOWER(name) LIKE CONCAT('%', :name, '%')
+        ORDER BY ${order_column} ${order_direction} 
+        LIMIT ${limit} OFFSET ${offset}", 
+        ["name" => strtolower($search)]);
         
-        
-            }
+            
+    }
 }
 
 

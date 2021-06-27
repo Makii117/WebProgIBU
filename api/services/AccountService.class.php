@@ -9,11 +9,12 @@ class AccountService extends BaseService{
 public function __construct(){
     $this->dao =new AccountDao();
 }
+
 public function get_accounts($search, $offset, $limit, $order){
 if ($search){
-    Flight::json(Flight::AccountDao()->get_accounts($search, $offset, $limit, $order));
+  return $this->dao->get_accounts($search, $offset, $limit, $order);
   }else{
-    Flight::json(Flight::AccountDao()->get_all($offset,$limit, $order));
+    return $this->dao->get_all($offset, $limit, $order);
   }
 
 }
