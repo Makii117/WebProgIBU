@@ -9,7 +9,6 @@ class UserService extends BaseService{
 
   public function __construct(){
     $this->dao = new UserDao();
-    $this->accountDao = new AccountDao();
   }
 
   public function register($user){

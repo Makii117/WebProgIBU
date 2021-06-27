@@ -27,13 +27,14 @@ class RestaurantDao extends BaseDao{
         list($order_column, $order_direction) = self::parse_order($order);
 
 
-        return $this->query("SELECT * FROM cafes WHERE LOWER(name) LIKE CONCAT('%', :name, '%')
+        return $this->query("SELECT * FROM cafes WHERE LOWER(restaurant_name) LIKE CONCAT('%', :restaurant_name, '%')
         ORDER BY ${order_column} ${order_direction} 
         LIMIT ${limit} OFFSET ${offset}", 
-        ["name" => strtolower($search)]);
+        ["restaurant_name" => strtolower($search)]);
         
             
     }
+
 }
 
 

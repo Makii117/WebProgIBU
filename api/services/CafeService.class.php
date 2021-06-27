@@ -35,11 +35,11 @@ class CafeService extends BaseService{
 
 
 
-        public function get_cafes($search, $offset, $limit,$order){
+        public function get_cafes($search, $offset, $limit){
           if ($search){
-            return $this->dao->get_cafes($search, $offset, $limit,$order);
+            return $this->dao->get_cafes($search, $offset, $limit);
             }else{
-              return $this->dao->get_all($offset,$limit,$order);
+              return $this->dao->get_all($offset,$limit);
             }
           
           }

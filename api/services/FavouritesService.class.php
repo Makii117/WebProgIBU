@@ -4,7 +4,7 @@ require_once dirname(__FILE__) . "/BaseService.class.php";
 require_once dirname(__FILE__).'/../dao/UserFavoritesDao.class.php';
 
 
-class FavouritesService extends BaseService{
+class FavoritesService extends BaseService{
 
 
     public function __construct(){

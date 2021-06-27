@@ -3,9 +3,9 @@ Flight::route('GET /cafes', function(){
     $offset = Flight::query('offset', 0);
     $limit = Flight::query('limit', 10);
     $search = Flight::query('search');
-    $order = Flight::query('order','-id');
 
-    Flight::json(Flight::cafeService()->get_cafes($search,$offset,$limit,$order));
+
+    Flight::json(Flight::cafeService()->get_cafes($search,$offset,$limit));
 
 });
 

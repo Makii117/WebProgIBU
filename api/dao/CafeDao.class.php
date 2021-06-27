@@ -5,10 +5,6 @@ class CafeDao extends BaseDao{
     public function __construct(){
         parent::__construct("cafes");
     }
-
-
-
-
     
     public function get_rating($id){
         return $this->query("SELECT rating FROM cafes WHERE id =:id",["id"=>$id]);
@@ -26,13 +22,10 @@ class CafeDao extends BaseDao{
         return $this->query("SELECT offer FROM cafes WHERE id =:id",["id"=>$id]);
     }
 
-    
-
     public function get_cafes($search,$offset,$limit){
-        return $this->query("SELECT * FROM cafes WHERE LOWER(name) LIKE CONCAT('%', :name, '%')
+        return $this->query("SELECT * FROM cafes WHERE LOWER(cafe_name) LIKE CONCAT('%', :cafe_name, '%')
         LIMIT ${limit} OFFSET ${offset}", 
-        ["name" => strtolower($search)]);
-        
+        ["cafe_name" => strtolower($search)]);
             
     }
 }

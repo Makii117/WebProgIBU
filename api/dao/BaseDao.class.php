@@ -111,7 +111,7 @@ protected function insert($table,$entity){
   public function get_by_id($id){
     return $this->query("SELECT * FROM ".$this->table." WHERE id = :id",["id"=>$id]);
   }
-  public function get_all($offset = 0, $limit = 25, $order="-id"){
+  public function get_all($offset = 0, $limit = 10, $order="-id"){
     list($order_column, $order_direction) = self::parse_order($order);
 
     return $this->query("SELECT *
