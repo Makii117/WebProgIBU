@@ -53,8 +53,14 @@ Flight::register('favoriteService','FavouritesService');
 Flight::route('/', function(){
     echo 'hello world3!';
 
+    Flight::redirect('/docs');
 
  });
+ Flight::route('GET /swagger', function(){
+  $openapi = @\OpenApi\scan(dirname(__FILE__)."/routes");
+  header('Content-Type: application/json');
+  echo $openapi->toJson();
+});
 Flight::start();
 
 
