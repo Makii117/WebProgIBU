@@ -3,9 +3,10 @@ Flight::route('GET /restaurants', function(){
     $offset = Flight::query('offset', 0);
     $limit = Flight::query('limit', 10);
     $search = Flight::query('search');
-    $order = Flight::query('order','-id');
-    Flight::json(Flight::restaurantService()->get_restaurants($search, $offset, $limit,$order));
 
+    Flight::json(Flight::restaurantService()->get_restaurants($search, $offset, $limit));
+
+    
 });
 
 Flight::route('GET /restaurants/@id', function($id){

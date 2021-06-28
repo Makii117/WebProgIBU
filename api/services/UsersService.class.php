@@ -16,38 +16,37 @@ class UserService extends BaseService{
 
   public function login($user){
     $db_user = $this->dao->get_user_by_email($user['email']);
-
     if (!isset($db_user['id'])) throw new Exception("User doesn't exists", 400);
+    if ($db_user['status'] != 'ACTIVE') throw new Exception("Account is not active!", 400);
+    if ($db_user['password'] != md5($user['password'])) throw new Exception("Invalid password! Try again!", 400);
 
-    if ($db_user['password'] != md5($user['password'])) throw new Exception("Invalid password", 400);
-    
     return $db_user;
   }
 
+  
   public function register($user){
    
-    $this->dao->beginTransaction();
+   
     try {
-
+      $this->dao->beginTransaction();
       $user = parent::add([
 
-        "name" => $user['name'],
+        "uname" => $user['uname'],
         "email" => $user['email'],
         "password" => $user['password'],
-        "status" => "ACTIVE",
         "role" => "USER",
-        "created_at" => date(Config::DATE_FORMAT),
         "token" => md5(random_bytes(16))
-        
+      
       ]);
 
     } catch (\Exception $e) {
-      $this->dao->rollBack();
-      if (str_contains($e->getMessage(), 'users.uq_user_email')) {
-        throw new Exception("Account with same email exists in the database", 400, $e);
-      }else{
+      
+      if (str_contains($e->getMessage(), 'users.user_email')) {
+          throw new Exception("Account with same email exists in the database", 400, $e);
+        }else{
         throw $e;
       }
+      $this->dao->rollBack();
     }
     $this->dao->commit();
     // TODO: send email with some token

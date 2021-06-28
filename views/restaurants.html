@@ -1,0 +1,81 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Restaurants</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row user-stuff">
+
+        </div>
+
+        <div class="row" style="margin-top: 10px;">
+            <div class="table-responsive">
+                <table id="restaurants-table" class="table responsive table-striped table-bordered table-hover" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Happy Hour Start</th>
+                            <th>Happy Hour End</th>
+                            <th>Rating</th>
+                            <th>Offer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+        <!-- /.row -->
+
+
+        <div class="row">
+          <div id="restaurants-chart-container"> </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<script type="text/javascript">
+
+  getRestaurants();
+
+  function getRestaurants(){
+
+    $.ajax({
+         url: "api/restaurants",
+         type: "GET",
+         beforeSend: function(xhr){},
+         success: function(data) {
+           console.log(data);
+           var html = "";
+           for(var i = 0; i < data.length; i++){
+             html += '<tr class="odd">'
+                 +'<td>'+data[i].id+'</td>'
+                 +'<td>'+data[i].restaurant_name+'</td>'
+                 +'<td>'+data[i].location+'</td>'
+                 +'<td>'+data[i].happyHourStart+'</td>'
+                 +'<td>'+data[i].happyHourEnd+'</td>'
+                 +'<td>'+data[i].rating+'</td>'
+                 +'<td>'+data[i].offer+'</td></tr>';
+           }
+
+           $("#restaurants-table tbody").html(html);
+
+         }
+      });
+  }
+</script>

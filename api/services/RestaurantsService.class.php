@@ -32,11 +32,11 @@ public function add($restaurant){
 
     }
 
-    public function get_restaurants($search, $offset, $limit,$order){
+    public function get_restaurants($search, $offset, $limit){
         if ($search){
-          return $this->dao->get_restaurants($search, $offset, $limit,$order);
+          return $this->dao->get_restaurants($search, $offset, $limit);
           }else{
-            return $this->dao->get_all($offset,$limit,$order);
+            return $this->dao->get_all($offset,$limit);
           }
         
         }

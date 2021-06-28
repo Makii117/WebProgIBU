@@ -22,13 +22,9 @@ class RestaurantDao extends BaseDao{
         return $this->query("SELECT offer FROM restaurants WHERE id =:id",["id"=>$id]);
     }
       
-    public function get_restaurants($search,$offset,$limit,$order){
-
-        list($order_column, $order_direction) = self::parse_order($order);
-
+    public function get_restaurants($search,$offset,$limit){
 
         return $this->query("SELECT * FROM cafes WHERE LOWER(restaurant_name) LIKE CONCAT('%', :restaurant_name, '%')
-        ORDER BY ${order_column} ${order_direction} 
         LIMIT ${limit} OFFSET ${offset}", 
         ["restaurant_name" => strtolower($search)]);
         
