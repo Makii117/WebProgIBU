@@ -65,7 +65,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li class="divider"></li>
-                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <li><a href="login.html" onclick="doLlogout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -155,7 +155,24 @@
 
       // run app
       app.run();
+
+      if (!window.localStorage.getItem("token")){
+              AUtils.role_based_elements();
+              $('#favorites').hide();
+            }else{
+              AUtils.role_based_elements();
+              $('#favorites').show();
+            }
     });
+
+        
+      
+
+          function doLogout(){
+            window.localStorage.clear();
+            window.location.href = 'login.html';
+          }
+
   </script>
 
     </body>

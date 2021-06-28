@@ -52,15 +52,16 @@ class FavoritesService extends BaseService{
   }
 
 
-        public function get_cafes($search, $offset, $limit,$order){
-          if ($search){
-            return $this->dao->get_cafes($search, $offset, $limit,$order);
-            }else{
-              return $this->dao->get_all($offset,$limit,$order);
-            }
-          
+        public function get_favourite_cafes($userId){
+      
+            return $this->dao->get_favorite_cafes($userId);
+   
           }
-
+          public function get_favourite_restaurants($userId){
+      
+            return $this->dao->get_favorite_restaurants($userId);
+   
+          }
 
       }
     
