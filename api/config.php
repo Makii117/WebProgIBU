@@ -5,13 +5,13 @@ class Config{
 
 
     public static function DB_HOST(){
-        return Config::get_env("DB_HOST", "192.168.1.59");
+        return Config::get_env("DB_HOST", "#####");
       }
       public static function DB_USERNAME(){
-        return Config::get_env("DB_USERNAME", "admin");
+        return Config::get_env("DB_USERNAME", "#######");
       }
       public static function DB_PASSWORD(){
-        return Config::get_env("DB_PASSWORD", "PremiumTPLINK1");
+        return Config::get_env("DB_PASSWORD", "#######");
       }
       public static function DB_SCHEME(){
         return Config::get_env("DB_SCHEME", "happyHour");
